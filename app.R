@@ -8,7 +8,7 @@ library(plotly)
 ui <- fluidPage(
    # Application title
    titlePanel("Power Estimation Tool"),
-   h1("Warning--still in testing--do not use for actual research!"),
+   #h1("Warning--still in testing--do not use for actual research!"),
    sidebarLayout(
       sidebarPanel(
         selectInput("type",
@@ -97,7 +97,7 @@ server <- function(input, output) {
       sliderInput("n",
                   lab,
                   min = 4,
-                  max = 50,
+                  max = 100,
                   value = 30)
     }
     else if (input$type == "crt") {
@@ -105,7 +105,7 @@ server <- function(input, output) {
       sliderInput("n",
                   lab,
                   min = 4,
-                  max = 50,
+                  max = 100,
                   value = 30)
     }
     else if (input$type == "msrt") {
@@ -113,7 +113,7 @@ server <- function(input, output) {
       sliderInput("n",
                   lab,
                   min = 4,
-                  max = 50,
+                  max = 100,
                   value = 30)
     }
    })
@@ -152,7 +152,7 @@ server <- function(input, output) {
         sliderInput("m",
                     lab,
                     min = 2,
-                    max = 25,
+                    max = 100,
                     value = 10)
       }
     }
@@ -284,7 +284,7 @@ server <- function(input, output) {
      req(input$es)
      if (input$type == "srs") {
        whatisX <- "Units per group"
-       x <- seq(2,50, by=2)
+       x <- seq(2,100, by=2)
        N <- 2*x
        df <- 2*x-2
        ncp <- input$es*sqrt(x/2)
@@ -295,7 +295,7 @@ server <- function(input, output) {
      }
      else if (input$type == "crt") {
        whatisX <- "Clusters per group"
-       x <- seq(2,25)
+       x <- seq(2,100)
        N <- 2*input$n*x
        df <- 2*x-2
        ncp <- input$es*sqrt(input$n*x/2)*sqrt(1/(1+(input$n-1)*input$icc))
@@ -306,7 +306,7 @@ server <- function(input, output) {
      }
      else if (input$type == "msrt") {
        whatisX <- "Total clusters"
-       x <- seq(2,25)
+       x <- seq(2,100)
        N <- 2*input$n*x
        df <- x-1
        ncp <- input$es*sqrt(input$n*x/2)*sqrt(1/(1+(input$upsilon*input$n/2-1)*input$icc))
@@ -327,7 +327,7 @@ server <- function(input, output) {
      req(input$power)
      if (input$type == "srs") {
        whatisX <- "Units per group"
-       x <- seq(2,50)
+       x <- seq(2,100)
        N <- 2*x
        df <- 2*x-2
        M <- qt(input$power,df)-qt(input$alpha/2,df)
